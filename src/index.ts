@@ -8,7 +8,7 @@ async function main() {
   const url = await prompt(`URL?\n`);
   const info = await yt.getInfo(url);
   console.log(info);
-  const filename = await yt.download(url);
+  const filename = await yt.mux(url);
   console.log('done!', filename);
 }
 
