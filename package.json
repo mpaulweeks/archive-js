@@ -23,6 +23,7 @@
   "homepage": "https://github.com/mpaulweeks/archive-js#readme",
   "dependencies": {
     "async-prompt": "^1.0.1",
+    "escape-filename": "^1.1.2",
     "ytdl-core": "^4.9.2",
     "ytdl-core-muxer": "^1.0.1"
   },

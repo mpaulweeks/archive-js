@@ -1,19 +1,27 @@
+import escapeFile from 'escape-filename';
 import fs from 'fs';
 import ytdl from 'ytdl-core';
 import ytmux from 'ytdl-core-muxer';
 
-type YoutubeInfo = ytdl.videoInfo;
+interface YoutubeInfo {
+  url: string;
+  file: string;
+  raw: ytdl.videoInfo;
+}
 
 export class YouTube {
   async getInfo(url: string): Promise<YoutubeInfo> {
     const info = await ytdl.getBasicInfo(url);
-    return info;
+    return {
+      url,
+      file: escapeFile.escape(`${info.videoDetails.author.name} | ${info.videoDetails.title}`),
+      raw: info,
+    };
   }
 
-  async mux(url: string): Promise<string> {
-    const info = await this.getInfo(url);
-    const filename = `out/${info.videoDetails.author.name} | ${info.videoDetails.title}.mp4`;
-    const readStream = ytmux(url);
+  async mux(info: YoutubeInfo): Promise<string> {
+    const filename = `out/${info.file}.mp4`;
+    const readStream = ytmux(info.url);
     const writeStream = fs.createWriteStream(filename);
     const promise = new Promise<void>((resolve, reject) => {
       writeStream.on('finish', resolve);
