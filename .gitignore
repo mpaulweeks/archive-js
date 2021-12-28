@@ -1,4 +1,5 @@
 out/
+auth.json
 
 # Logs
 logs

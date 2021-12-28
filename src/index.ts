@@ -7,6 +7,11 @@ import { YouTube } from './youtube';
 async function main() {
   const yt = new YouTube();
 
+  // LindsayEllisVids
+  // UCG1h-Wqjtwz7uUANw6gazRw
+
+  await yt.getChannelVideos('UCG1h-Wqjtwz7uUANw6gazRw');
+
   const urls = [
     'https://www.youtube.com/watch?v=uTRUQ-RKfUs',
     'https://www.youtube.com/watch?v=ElPJr_tKkO4',
